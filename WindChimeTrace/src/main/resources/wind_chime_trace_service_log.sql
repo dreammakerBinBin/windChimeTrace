@@ -1,0 +1,25 @@
+CREATE TABLE `wind_chime_trace_service_log` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `org_id` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '组织id',
+  `user_id` bigint(20) DEFAULT NULL COMMENT '操作人id',
+  `user_name` varchar(40) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '操作人姓名',
+  `fun_module` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '模块',
+  `operate_type` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '操作类型',
+  `operate_remark` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '操作注释',
+  `operate_method` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '请求操作的方法',
+  `operate_params` longtext COLLATE utf8mb4_unicode_ci COMMENT '请求参数',
+  `operate_time` datetime DEFAULT NULL COMMENT '操作时间',
+  `operate_status` tinyint(4) DEFAULT '1' COMMENT '操作状态,1:成功 2:失败 默认 1',
+  `error_info` longtext COLLATE utf8mb4_unicode_ci COMMENT '错误消息',
+  `result` longtext COLLATE utf8mb4_unicode_ci COMMENT '返回结果',
+  `operate_ip` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '请求机器ip',
+  `execute_time` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '执行时长',
+  `request_source` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '请求来源',
+  `creator` bigint(20) DEFAULT NULL COMMENT '创建人',
+  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+  `del_flag` tinyint(4) DEFAULT '1' COMMENT '删除标识 1未删除 2已删除 默认 1',
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE KEY `idx_id` (`id`) USING BTREE,
+  KEY `idx_merge` (`id`,`user_name`,`fun_module`,`operate_ip`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC COMMENT='操作日志表';
+
